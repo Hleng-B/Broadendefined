@@ -1,51 +1,38 @@
 import { useState } from "react";
-import { Header } from "./components/Header";
-import { Hero } from "./components/Hero";
-import { Features } from "./components/Features";
-import { Process } from "./components/Process";
-import { Stats } from "./components/Stats";
-import  Testimonials  from "./components/Testimonials";
-import { CTA } from "./components/CTA";
-import { Footer } from "./components/Footer";
-import { Portfolio } from "./components/Portfolio";
-import { Blog } from "./components/Blog";
-import { Community } from "./components/Community";
+import SideNav from "./components/SideNav";
+import TopNav from "./components/TopNav";
+import Footer from "./components/Footer"; // placeholder file we'll add next
+
+// lazy simple page imports for now (we'll create these soon)
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Portfolio from "./pages/Portfolio";
+import Blog from "./pages/Blog";
+import Community from "./pages/Community";
+import Contact from "./pages/Contact";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<
-    "home" | "blog" | "community"
+  const [page, setPage] = useState<
+    "home" | "about" | "services" | "portfolio" | "blog" | "community" | "contact"
   >("home");
 
-  const handleNavigate = (
-    page: "home" | "blog" | "community",
-  ) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
-    <div className="min-h-screen bg-white">
-      <Header onNavigate={handleNavigate} />
-      {currentPage === "home" ? (
-        <main>
-          <Hero />
-          <Features />
-          <Process />
-          <Portfolio />
-          <Stats />
-          <Testimonials />
-          <CTA />
+    <div className="min-h-screen bg-gradient-to-b from-bdgreen to-bdgreen-light text-white font-rox">
+      <TopNav onNav={(p) => setPage(p)} />
+      <div className="flex pt-20">
+        <SideNav onNav={(p) => setPage(p)} />
+        <main className="flex-1 p-6">
+          {page === "home" && <Home />}
+          {page === "about" && <About />}
+          {page === "services" && <Services />}
+          {page === "portfolio" && <Portfolio />}
+          {page === "blog" && <Blog />}
+          {page === "community" && <Community />}
+          {page === "contact" && <Contact />}
+          <Footer />
         </main>
-      ) : currentPage === "blog" ? (
-        <main>
-          <Blog />
-        </main>
-      ) : (
-        <main>
-          <Community />
-        </main>
-      )}
-      <Footer onNavigate={handleNavigate} />
+      </div>
     </div>
   );
 }
