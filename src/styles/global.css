@@ -1,0 +1,19 @@
+/* --- Fonts must come first --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+/* --- Tailwind Layers --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your CSS variables start below */
+:root {
+  --mustard: #e1ad21;
+  --bdgreen: #2d6a4f;
+  --bdgreen-light: #4ea67a;
+}
+
+/* heading font fallback */
+h1,h2,h3,h4 { font-family: 'RoxboroughCF', 'Playfair Display', serif; }
+
+.container { max-width: 1200px; margin-left:auto; margin-right:auto; }
